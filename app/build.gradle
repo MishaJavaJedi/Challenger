@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization' version("1.5.30")
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -37,6 +41,7 @@ android {
 
 dependencies {
 
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     def lifecycle_version = "2.4.1"
     def activity_version = "1.4.0"
 
@@ -57,4 +62,17 @@ dependencies {
 
     //Material Design
     implementation 'com.google.android.material:material:1.6.1'
+
+
+    implementation 'com.github.akshaaatt:Sliding-Carousel:1.0.4'
+
+
+    //FragmentNav
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
+
+    //Room
+    def room_ver = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_ver"
+    kapt "androidx.room:room-compiler:$room_ver"
 }
