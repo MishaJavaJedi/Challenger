@@ -7,7 +7,9 @@ interface ChallengeRepository {
 
     val data: LiveData<List<ChallengeCard>>
 
-    fun getData()
+  //  fun getData()
+
+    fun save(challengeCard: ChallengeCard)
 
     companion object {
         const val NEW_CHALLENGE_ID = 0L

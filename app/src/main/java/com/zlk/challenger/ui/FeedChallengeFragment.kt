@@ -1,6 +1,7 @@
 package com.zlk.challenger.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -22,19 +23,36 @@ class FeedChallengeFragment : Fragment(R.layout.feed_challenge_fragment) {
         savedInstanceState: Bundle?
     ) = FeedChallengeFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
 
-        viewModel.initCarousel()
+        //Initialize DB with single card
+        viewModel.save()
 
+        //Initialize DB manual by clicking FAB
+        binding.fab.setOnClickListener {
+            viewModel.save()
+        }
+
+
+        //Observing DB size & casting challengeCard -> CarouselItem
+        viewModel.data.observe(viewLifecycleOwner) {
+            binding.countdownTimer.text ="Size of DB = " + it.size.toString()
+            viewModel.cardToCarouselItem()
+        }
+
+        //Initialize Carousel
         val carousel: ImageCarousel = binding.carousel
         carousel.registerLifecycle(lifecycle)
 
         binding.carousel.apply {
             carouselListener = object : CarouselListener {
                 override fun onClick(position: Int, carouselItem: CarouselItem) {
-                    binding.countdownText.text = position.toString()
+                    binding.countdownText.text = "#Card clicked: $position"
                 }
             }
         }
 
-        carousel.setData(viewModel.carouselItemList)
+        //Rendering Carousel by liveData changing
+        viewModel.data.observe(viewLifecycleOwner) {
+            carousel.setData(viewModel.carouselItemList)
+        }
     }.root
 }

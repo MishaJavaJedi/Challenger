@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "ChallengeCards")
+@Entity(tableName = "challenges")
 class ChallengeCardEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -13,12 +13,13 @@ class ChallengeCardEntity(
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "content")
-    val  content: String,
+    val content: String,
     @ColumnInfo(name = "type")
     val type: String,
     @ColumnInfo(name = "isFavorite")
     val isFavorite:Boolean,
     @ColumnInfo(name = "isDone")
-    val isDone:Boolean
-) {
-}
+    val isDone:Boolean,
+    @ColumnInfo(name = "imageUrl")
+    val imageUrl:String,
+)
